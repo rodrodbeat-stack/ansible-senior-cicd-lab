@@ -1,0 +1,5 @@
+---
+environment: QA
+app_message: "Aplicacion desplegada en calidad"
+web_root: /var/www/qa
+web_port: 8082

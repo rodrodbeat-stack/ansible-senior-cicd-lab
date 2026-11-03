@@ -1,0 +1,5 @@
+---
+environment: PROD
+app_message: "Aplicacion desplegada en produccion"
+web_root: /var/www/prod
+web_port: 8083

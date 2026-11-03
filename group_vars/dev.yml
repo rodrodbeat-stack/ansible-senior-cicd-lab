@@ -1,0 +1,5 @@
+---
+environment: DEV
+app_message: "Aplicacion desplegada en desarrollo"
+web_root: /var/www/dev
+web_port: 8081

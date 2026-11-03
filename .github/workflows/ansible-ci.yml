@@ -1,0 +1,35 @@
+name: Ansible CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible nginx
+
+      - name: Validar sintaxis
+        run: ansible-playbook -i inventory/hosts.ini site.yml --syntax-check
+
+      - name: Validar NGINX
+        run: sudo nginx -t
+
+      - name: Verificar archivos
+        run: |
+          test -f roles/nginx/tasks/main.yml
+          test -f roles/nginx/handlers/main.yml
+          test -f roles/nginx/templates/index.html.j2
+          test -f pipeline/deploy.sh
+
+      - name: CI completado
+        run: echo "VALIDACION CI COMPLETADA"

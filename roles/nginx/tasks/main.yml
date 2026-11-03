@@ -1,0 +1,36 @@
+---
+- name: Actualizar repositorios
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Instalar NGINX
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+
+- name: Crear directorio del entorno
+  ansible.builtin.file:
+    path: "{{ web_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Validar configuracion NGINX
+  ansible.builtin.command: nginx -t
+  changed_when: false
+
+- name: Publicar pagina web
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: "{{ web_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  notify: Reiniciar NGINX
+
+- name: Iniciar servicio NGINX
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true

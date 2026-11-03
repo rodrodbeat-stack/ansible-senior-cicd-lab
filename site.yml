@@ -1,0 +1,24 @@
+---
+- name: Despliegue DEV
+  hosts: dev
+  become: true
+  vars_files:
+    - group_vars/dev.yml
+  roles:
+    - nginx
+
+- name: Despliegue QA
+  hosts: qa
+  become: true
+  vars_files:
+    - group_vars/qa.yml
+  roles:
+    - nginx
+
+- name: Despliegue PROD
+  hosts: prod
+  become: true
+  vars_files:
+    - group_vars/prod.yml
+  roles:
+    - nginx
