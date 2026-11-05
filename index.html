@@ -2,35 +2,484 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ANSIBLE SENIOR CI/CD LAB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ANSIBLE GOVERNANCE COMMAND CENTER</title>
+
 <style>
+:root {
+  --bg:#070b14;
+  --panel:#101827;
+  --panel2:#0c1421;
+  --line:#25364b;
+  --cyan:#00e5ff;
+  --blue:#3985ff;
+  --purple:#b388ff;
+  --green:#00e5a0;
+  --orange:#ffb454;
+  --red:#ff5577;
+  --text:#e6edf7;
+  --muted:#8293a9;
+}
+
+*{box-sizing:border-box}
+
 body {
-  background:#080d16;
-  color:#35e8ff;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
   font-family:Arial,sans-serif;
-  text-align:center;
-  padding:60px 20px;
 }
-h1 {font-size:38px;}
-.panel {
-  border:1px solid #35e8ff;
+
+header {
+  padding:22px 30px;
+  background:#0b1220;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:15px;
+}
+
+.logo {
+  color:var(--cyan);
+  font-size:20px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+.status {
+  color:var(--green);
+  font-size:12px;
+}
+
+.container {
   padding:25px;
-  margin:30px auto;
-  max-width:600px;
-  background:#101a27;
+  max-width:1500px;
+  margin:auto;
 }
-span {color:#a4ff75;}
+
+.hero {
+  padding:30px;
+  border:1px solid var(--line);
+  background:linear-gradient(120deg,#111e32,#101322,#17102c);
+  border-radius:12px;
+  margin-bottom:22px;
+}
+
+.hero h1 {
+  font-size:30px;
+  color:var(--cyan);
+  margin:0 0 10px;
+}
+
+.hero p {color:var(--muted)}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:22px;
+}
+
+.card {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:20px;
+}
+
+.card h3 {
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:1px;
+}
+
+.metric {
+  font-size:30px;
+  font-weight:bold;
+  margin:12px 0;
+}
+
+.cyan{color:var(--cyan)}
+.green{color:var(--green)}
+.purple{color:var(--purple)}
+.orange{color:var(--orange)}
+
+.section-title {
+  color:var(--cyan);
+  font-size:15px;
+  letter-spacing:2px;
+  margin:30px 0 15px;
+}
+
+.environment {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.env {
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:23px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.env h2 {
+  font-size:23px;
+  letter-spacing:2px;
+}
+
+.circle {
+  width:105px;
+  height:105px;
+  margin:15px auto;
+  border-radius:50%;
+  border:5px solid var(--green);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  font-weight:bold;
+  box-shadow:0 0 18px #00e5a033;
+}
+
+.pipeline {
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.node {
+  flex:1;
+  min-width:115px;
+  padding:20px 10px;
+  text-align:center;
+  border:1px solid var(--cyan);
+  background:#0b1b2a;
+  border-radius:9px;
+  color:var(--cyan);
+}
+
+.arrow {
+  color:var(--purple);
+  font-size:24px;
+}
+
+.modules {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.module {
+  padding:22px;
+  border:1px solid var(--line);
+  background:var(--panel);
+  border-radius:10px;
+}
+
+.module h3 {
+  color:var(--purple);
+}
+
+.module p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+.bar {
+  height:8px;
+  background:#263348;
+  border-radius:10px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.bar span {
+  display:block;
+  height:100%;
+  width:96%;
+  background:var(--green);
+}
+
+button {
+  padding:12px 20px;
+  border:1px solid var(--cyan);
+  background:#10273a;
+  color:var(--cyan);
+  cursor:pointer;
+  border-radius:6px;
+  font-weight:bold;
+  margin:5px;
+}
+
+button:hover {
+  background:var(--cyan);
+  color:#06101b;
+}
+
+.logs {
+  background:#050a12;
+  border:1px solid var(--line);
+  padding:18px;
+  border-radius:8px;
+  color:var(--green);
+  font-family:monospace;
+  font-size:12px;
+  line-height:2;
+  min-height:110px;
+}
+
+footer {
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  margin-top:40px;
+  font-size:12px;
+}
+
+@media(max-width:900px) {
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .modules{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:600px) {
+  .container{padding:12px}
+  .grid,.environment,.modules{grid-template-columns:1fr}
+  .hero h1{font-size:23px}
+}
 </style>
 </head>
+
 <body>
-<h1>ANSIBLE SENIOR CI/CD LAB</h1>
-<div class="panel">
-<h2>Infraestructura On-Premise</h2>
-<p>Automatización con Ansible y Nginx</p>
-<p>DEV <span>●</span> QA <span>●</span> PROD <span>●</span></p>
-<p>CI/CD: GitHub Actions</p>
-<p>Estado: OPERATIVO</p>
+
+<header>
+  <div class="logo">◈ ANSIBLE GOVERNANCE</div>
+  <div class="status">● COMMAND CENTER / DEMO VISUAL</div>
+</header>
+
+<main class="container">
+
+<section class="hero">
+  <h1>INFRASTRUCTURE GOVERNANCE CENTER</h1>
+  <p>
+    Enterprise On-Premise Infrastructure · Automation · Security · Compliance
+  </p>
+  <p>
+    CONTROL PLANE / ANSIBLE / GITHUB ACTIONS / NGINX
+  </p>
+</section>
+
+<div class="grid">
+
+  <div class="card">
+    <h3>GOVERNANCE SCORE</h3>
+    <div class="metric cyan">96%</div>
+    <div class="bar"><span></span></div>
+    <small>Indicador visual de referencia</small>
+  </div>
+
+  <div class="card">
+    <h3>ENVIRONMENTS</h3>
+    <div class="metric green">03</div>
+    <small>DEV / QA / PROD</small>
+  </div>
+
+  <div class="card">
+    <h3>AUTOMATION ENGINE</h3>
+    <div class="metric purple">ANSIBLE</div>
+    <small>Configuration Management</small>
+  </div>
+
+  <div class="card">
+    <h3>CI/CD PLATFORM</h3>
+    <div class="metric orange">GITHUB</div>
+    <small>GitHub Actions</small>
+  </div>
+
 </div>
+
+<h2 class="section-title">01 / ENVIRONMENT CONTROL</h2>
+
+<div class="environment">
+
+  <div class="env">
+    <h2 class="green">DEV</h2>
+    <div class="circle">01</div>
+    <p>Development Environment</p>
+    <span class="green">● CONFIGURED</span>
+  </div>
+
+  <div class="env">
+    <h2 class="cyan">QA</h2>
+    <div class="circle" style="border-color:var(--cyan)">02</div>
+    <p>Quality Assurance</p>
+    <span class="cyan">● CONFIGURED</span>
+  </div>
+
+  <div class="env">
+    <h2 class="purple">PROD</h2>
+    <div class="circle" style="border-color:var(--purple)">03</div>
+    <p>Production Environment</p>
+    <span class="purple">● CONFIGURED</span>
+  </div>
+
+</div>
+
+<h2 class="section-title">02 / CI/CD AUTOMATION PIPELINE</h2>
+
+<div class="card">
+
+  <div class="pipeline">
+    <div class="node">GIT PUSH</div>
+    <div class="arrow">›</div>
+    <div class="node">VALIDATION</div>
+    <div class="arrow">›</div>
+    <div class="node">ANSIBLE</div>
+    <div class="arrow">›</div>
+    <div class="node">DEPLOY</div>
+    <div class="arrow">›</div>
+    <div class="node">VERIFY</div>
+  </div>
+
+  <br>
+
+  <center>
+    <button onclick="runPipeline()">▶ SIMULATE PIPELINE</button>
+    <button onclick="rollback()">↶ ROLLBACK DEMO</button>
+  </center>
+
+</div>
+
+<h2 class="section-title">03 / GOVERNANCE & SECURITY</h2>
+
+<div class="modules">
+
+  <div class="module">
+    <h3>◈ CONFIGURATION MANAGEMENT</h3>
+    <p>
+      Ansible Playbooks<br>
+      Roles & Variables<br>
+      Jinja2 Templates<br>
+      Inventory Management
+    </p>
+  </div>
+
+  <div class="module">
+    <h3>◈ SECURITY GOVERNANCE</h3>
+    <p>
+      Access Control<br>
+      SSH Security<br>
+      Least Privilege<br>
+      Secrets Management
+    </p>
+  </div>
+
+  <div class="module">
+    <h3>◈ COMPLIANCE CONTROL</h3>
+    <p>
+      Configuration Standards<br>
+      Change Management<br>
+      Infrastructure Baselines<br>
+      Audit & Traceability
+    </p>
+  </div>
+
+  <div class="module">
+    <h3>◈ INFRASTRUCTURE</h3>
+    <p>
+      Linux Servers<br>
+      Nginx Web Services<br>
+      Network Configuration<br>
+      On-Premise Architecture
+    </p>
+  </div>
+
+  <div class="module">
+    <h3>◈ DELIVERY CONTROL</h3>
+    <p>
+      Git Version Control<br>
+      GitHub Actions<br>
+      Deployment Validation<br>
+      Release Management
+    </p>
+  </div>
+
+  <div class="module">
+    <h3>◈ OBSERVABILITY</h3>
+    <p>
+      Service Health<br>
+      Execution Logs<br>
+      HTTP Validation<br>
+      Operational Monitoring
+    </p>
+  </div>
+
+</div>
+
+<h2 class="section-title">04 / EXECUTION TERMINAL</h2>
+
+<div class="logs" id="logs">
+  [SYSTEM] ANSIBLE GOVERNANCE CENTER INITIALIZED<br>
+  [INFO] On-Premise architecture loaded<br>
+  [INFO] DEV / QA / PROD inventory configured<br>
+  [INFO] GitHub Actions workflow registered<br>
+  [READY] Waiting for operator command...
+</div>
+
+</main>
+
+<footer>
+  ANSIBLE SENIOR CI/CD LAB · INFRASTRUCTURE GOVERNANCE<br>
+  ON-PREMISE AUTOMATION · DEVSECOPS · PLATFORM ENGINEERING
+</footer>
+
+<script>
+const logs = document.getElementById("logs");
+
+function addLog(message) {
+  logs.innerHTML += "<br>[SYSTEM] " + message;
+  logs.scrollTop = logs.scrollHeight;
+}
+
+function runPipeline() {
+  logs.innerHTML = "[PIPELINE] Starting visual demonstration...";
+  const steps = [
+    "Git push detected",
+    "Ansible syntax validation",
+    "Inventory DEV / QA / PROD loaded",
+    "Configuration management",
+    "Deployment verification",
+    "Visual pipeline completed"
+  ];
+
+  let i = 0;
+
+  const timer = setInterval(() => {
+    if (i >= steps.length) {
+      clearInterval(timer);
+      addLog("DEMO FINISHED - no real deployment executed");
+      return;
+    }
+
+    addLog(steps[i]);
+    i++;
+  }, 850);
+}
+
+function rollback() {
+  addLog("ROLLBACK DEMONSTRATION REQUESTED");
+  addLog("Simulation only - no server configuration changed");
+}
+</script>
+
 </body>
 </html>
