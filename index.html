@@ -2,762 +2,275 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>DIGITAL FACTORY | SKYNET COMMAND CENTER</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#05050b">
+<title>DIGITAL FACTORY // SKYNET 2050</title>
 <style>
-:root {
- --bg:#050505;
- --panel:rgba(12,13,15,.94);
- --line:#70251f;
- --red:#ff2525;
- --red2:#a00000;
- --orange:#ff6a00;
- --steel:#b7b7b7;
- --text:#ededed;
- --muted:#929292;
- --green:#ff3838;
+:root{
+ --bg:#05060b;--panel:rgba(7,10,19,.94);--panel2:#0b101b;--line:#25445a;
+ --cyan:#20e8ff;--blue:#397bff;--purple:#c14dff;--pink:#ff20c8;
+ --red:#ff263e;--text:#e8f4ff;--muted:#8da4b9;--green:#35ff9b;
 }
-
-* {
- box-sizing:border-box;
-}
-
-html {
- scroll-behavior:smooth;
-}
-
-body {
- margin:0;
- background:
- linear-gradient(rgba(0,0,0,.77),rgba(0,0,0,.91)),
- url("assets/digital-factory-bg.png") center center / cover fixed;
- color:var(--text);
- font-family:Arial,sans-serif;
-}
-
-/* SCANLINES */
-
-body:before {
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:20;
- background:repeating-linear-gradient(
- transparent 0px,
- rgba(255,30,20,.035) 1px,
- transparent 3px
- );
-}
-
-/* HEADER */
-
-header {
- padding:18px 30px;
- background:rgba(0,0,0,.92);
- border-bottom:2px solid var(--red);
- display:flex;
- justify-content:space-between;
- align-items:center;
- flex-wrap:wrap;
- gap:15px;
- box-shadow:0 5px 30px #ff000033;
-}
-
-.logo {
- color:var(--red);
- font-size:20px;
- font-weight:900;
- letter-spacing:3px;
- text-shadow:0 0 15px red;
-}
-
-.status {
- color:#ff4949;
- font-size:11px;
- letter-spacing:2px;
- animation:blink 1.5s infinite;
-}
-
-/* MAIN */
-
-.container {
- padding:25px;
- max-width:1500px;
- margin:auto;
-}
-
-/* HERO */
-
-.hero {
- position:relative;
- overflow:hidden;
- padding:35px;
- border:1px solid #87342b;
- background:
- linear-gradient(110deg,rgba(15,5,4,.95),rgba(10,10,10,.78));
- margin-bottom:25px;
- box-shadow:inset 0 0 40px #ff180c18;
-}
-
-.hero:after {
- content:"T-800";
- position:absolute;
- right:35px;
- top:35px;
- font-size:70px;
- font-weight:900;
- color:#ff252510;
- letter-spacing:8px;
-}
-
-.hero h1 {
- font-size:32px;
- color:var(--red);
- margin:0 0 12px;
- letter-spacing:3px;
- text-shadow:0 0 15px #ff000088;
-}
-
-.hero p {
- color:#bbb;
- font-size:13px;
- letter-spacing:2px;
-}
-
-/* ROBOT EYE */
-
-.eye-container {
- display:flex;
- justify-content:center;
- align-items:center;
- margin:35px auto 20px;
-}
-
-.robot-eye {
- width:135px;
- height:135px;
- border:2px solid #8b3028;
- border-radius:50%;
- display:flex;
- justify-content:center;
- align-items:center;
- background:radial-gradient(circle,#35100d,#080808 70%);
- box-shadow:0 0 25px #ff000066,
- inset 0 0 25px #ff000033;
- position:relative;
-}
-
-.robot-eye:before {
- content:"";
- position:absolute;
- width:110px;
- height:110px;
- border:1px solid #ff252566;
- border-radius:50%;
-}
-
-.robot-eye:after {
- content:"";
- position:absolute;
- width:90px;
- height:90px;
- border:1px dashed #ff2525;
- border-radius:50%;
- animation:spin 12s linear infinite;
-}
-
-.lens {
- width:38px;
- height:38px;
- background:radial-gradient(
- circle,
- #fff 0%,
- #ff8585 12%,
- #ff0000 35%,
- #780000 75%
- );
- border-radius:50%;
- box-shadow:0 0 15px red,0 0 40px red;
- animation:eyePulse 1.5s infinite alternate;
-}
-
-.scanner {
- width:100%;
- height:2px;
- position:absolute;
- background:#ff2525;
- box-shadow:0 0 15px red;
- animation:scan 3s linear infinite;
-}
-
-.core-label {
- text-align:center;
- color:#ff4545;
- font-size:11px;
- letter-spacing:3px;
-}
-
-/* METRICS */
-
-.grid {
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:15px;
- margin-bottom:22px;
-}
-
-.card,.env,.module {
- background:var(--panel);
- border:1px solid var(--line);
- border-radius:4px;
- padding:20px;
- box-shadow:inset 0 0 15px #ff000008;
- transition:.3s;
-}
-
-.card:hover,.module:hover,.env:hover {
- border-color:var(--red);
- box-shadow:0 0 20px #ff000033;
- transform:translateY(-3px);
-}
-
-.card h3 {
- font-size:11px;
- color:#aaa;
- letter-spacing:2px;
-}
-
-.metric {
- font-size:29px;
- font-weight:bold;
- margin:12px 0;
- color:var(--red);
- text-shadow:0 0 12px #ff000055;
-}
-
-.card small {
- color:#999;
-}
-
-.bar {
- height:8px;
- background:#302020;
- overflow:hidden;
- margin:12px 0;
-}
-
-.bar span {
- display:block;
- height:100%;
- width:96%;
- background:linear-gradient(90deg,#700000,#ff2929);
- box-shadow:0 0 15px red;
-}
-
-/* SECTION TITLES */
-
-.section-title {
- color:var(--red);
- font-size:14px;
- letter-spacing:3px;
- margin:32px 0 15px;
- border-left:3px solid red;
- padding-left:12px;
-}
-
-/* ENVIRONMENTS */
-
-.environment {
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:15px;
-}
-
-.env {
- text-align:center;
-}
-
-.env h2 {
- font-size:23px;
- letter-spacing:4px;
- color:var(--red);
-}
-
-.circle {
- width:105px;
- height:105px;
- margin:15px auto;
- border-radius:50%;
- border:3px solid var(--red);
- display:flex;
- justify-content:center;
- align-items:center;
- font-size:25px;
- font-weight:bold;
- color:white;
- box-shadow:0 0 20px #ff000033,
- inset 0 0 20px #ff000022;
-}
-
-.env p {
- color:#aaa;
- font-size:13px;
-}
-
-.env span {
- color:#ff4444;
- font-size:11px;
-}
-
-/* PIPELINE */
-
-.pipeline {
- display:flex;
- justify-content:space-around;
- align-items:center;
- gap:10px;
- flex-wrap:wrap;
-}
-
-.node {
- flex:1;
- min-width:110px;
- padding:20px 10px;
- text-align:center;
- border:1px solid #96352e;
- background:linear-gradient(145deg,#230d0b,#090909);
- color:#ff4545;
- font-size:12px;
- font-weight:bold;
- letter-spacing:1px;
- transition:.3s;
-}
-
-.node.active {
- background:#850900;
- color:white;
- box-shadow:0 0 25px red;
- border-color:white;
-}
-
-.arrow {
- color:var(--red);
- font-size:24px;
-}
-
-/* MODULES */
-
-.modules {
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:15px;
-}
-
-.module h3 {
- color:var(--red);
- font-size:13px;
- letter-spacing:1px;
-}
-
-.module p {
- color:#aaa;
- font-size:13px;
- line-height:1.8;
-}
-
-/* BUTTONS */
-
-button {
- padding:13px 22px;
- border:1px solid var(--red);
- background:#210907;
- color:#ff4444;
- cursor:pointer;
- font-weight:bold;
- letter-spacing:1px;
- margin:5px;
- transition:.3s;
-}
-
-button:hover {
- background:var(--red);
- color:white;
- box-shadow:0 0 20px red;
-}
-
-/* TERMINAL */
-
-.logs {
- background:rgba(0,0,0,.96);
- border:1px solid #6b211b;
- padding:18px;
- color:#ff4545;
- font-family:monospace;
- font-size:12px;
- line-height:2;
- min-height:140px;
- max-height:230px;
- overflow:auto;
- box-shadow:inset 0 0 25px #ff000011;
-}
-
-footer {
- text-align:center;
- padding:30px;
- color:#888;
- border-top:1px solid #48201c;
- margin-top:40px;
- font-size:11px;
- letter-spacing:2px;
- line-height:2;
-}
-
-/* ANIMATIONS */
-
-@keyframes blink {
- 50% {opacity:.35}
-}
-
-@keyframes spin {
- to {transform:rotate(360deg)}
-}
-
-@keyframes eyePulse {
- from {box-shadow:0 0 10px red}
- to {box-shadow:0 0 35px red,0 0 55px #ff000088}
-}
-
-@keyframes scan {
- 0% {top:0;opacity:0}
- 15% {opacity:1}
- 85% {opacity:1}
- 100% {top:100%;opacity:0}
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px) {
- .grid {grid-template-columns:repeat(2,1fr)}
- .modules {grid-template-columns:repeat(2,1fr)}
-}
-
-@media(max-width:600px) {
- header {padding:16px}
- .logo {font-size:15px}
- .container {padding:12px}
- .grid,.environment,.modules {grid-template-columns:1fr}
- .hero {padding:22px}
- .hero h1 {font-size:22px}
- .hero:after {display:none}
- .pipeline {flex-direction:column}
- .node {width:100%}
- .arrow {transform:rotate(90deg)}
-}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#03050a;color:var(--text);font-family:Arial,Helvetica,sans-serif;
+ background-image:radial-gradient(ellipse at 50% 0%,#24113b 0,transparent 45%),
+ linear-gradient(120deg,#03050a,#080b16 50%,#05040b);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:10;opacity:.2;
+ background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(32,232,255,.08) 4px,transparent 5px)}
+button,select{font:inherit}
+.topbar{height:68px;padding:8px 18px;display:grid;grid-template-columns:360px 1fr 340px;gap:18px;align-items:center;
+ background:rgba(2,5,10,.96);border-bottom:1px solid #41627c;box-shadow:0 5px 25px #000}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--cyan);box-shadow:0 0 15px #19dfff99}
+.brand-title{font-size:21px;font-weight:900;letter-spacing:2px;white-space:nowrap;text-shadow:0 0 12px #9fefff}
+.brand-title small{display:block;color:var(--pink);font-size:10px;letter-spacing:2px;margin-top:3px}
+.top-center{text-align:center;color:#d9e8f4;font-size:12px;letter-spacing:3px}
+.top-status{display:flex;justify-content:flex-end;gap:18px;align-items:center;font:12px monospace;white-space:nowrap}
+.online{color:var(--green)}.online:before{content:"●";margin-right:7px;text-shadow:0 0 10px var(--green)}
+.layout{display:grid;grid-template-columns:210px minmax(0,1fr) 310px;gap:12px;padding:12px;max-width:1800px;margin:auto}
+.sidebar,.rightbar{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{background:var(--panel);border:1px solid #29485e;box-shadow:inset 0 0 22px #0a1830,0 0 12px #06121f;border-radius:8px;overflow:hidden;position:relative}
+.panel:before{content:"";position:absolute;left:0;top:0;width:70px;height:2px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.panel-head{padding:11px 14px;border-bottom:1px solid #203b50;color:var(--cyan);font-size:13px;font-weight:bold;letter-spacing:1.5px}
+.nav{padding:8px}
+.nav button{display:block;width:100%;text-align:left;padding:12px 10px;background:transparent;border:1px solid transparent;color:#a9c5d8;cursor:pointer;font-size:12px;letter-spacing:1px}
+.nav button:hover,.nav button.active{color:#fff;border-color:var(--pink);background:linear-gradient(90deg,#5c123e66,transparent);box-shadow:inset 3px 0 var(--pink)}
+.nav-label{color:var(--red);font-size:11px;font-weight:bold;padding:12px 10px 5px;letter-spacing:2px}
+.logo-card{padding:12px;text-align:center}
+.logo-card img{width:100%;max-width:180px;border-radius:50%;border:2px solid var(--purple);box-shadow:0 0 20px #a42bff88}
+.logo-card strong{display:block;color:var(--pink);letter-spacing:3px;margin-top:8px;font-size:12px}
+.main{display:flex;flex-direction:column;gap:12px;min-width:0}
+.hero{min-height:245px;padding:24px;display:flex;align-items:center;position:relative;overflow:hidden;
+ background:linear-gradient(90deg,rgba(2,5,12,.94),rgba(4,8,18,.58) 55%,rgba(3,5,12,.22)),
+ url("dashboard-reference.png") center 40%/cover;border-color:#3a718e}
+.hero-copy{position:relative;z-index:1;max-width:70%}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#bfefff}
+.hero h1{font-size:clamp(30px,4vw,58px);line-height:.95;margin:10px 0;color:#f2f7ff;letter-spacing:3px;text-shadow:0 0 15px #a4eaff88}
+.hero h1 span{display:block;color:var(--pink);font-size:.75em;letter-spacing:8px}
+.hero p{color:#d1e2ef;font-size:12px;letter-spacing:2px}
+.action{border:1px solid var(--pink);background:#270c2b;color:#fff;padding:11px 18px;cursor:pointer;font-weight:bold;letter-spacing:1px;box-shadow:0 0 14px #ed16c755}
+.action:hover{background:var(--pink);box-shadow:0 0 20px var(--pink)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.metric{padding:13px}
+.metric label{font-size:10px;color:#9eb6c9;letter-spacing:1.4px}
+.metric strong{display:block;font-size:25px;color:var(--red);margin:8px 0;text-shadow:0 0 12px #ff263e66}
+.metric small{font-size:10px;color:var(--muted)}
+.meter{height:5px;background:#1b2c3b;margin-top:8px}.meter i{display:block;height:100%;width:96%;background:linear-gradient(90deg,var(--purple),var(--cyan));box-shadow:0 0 9px var(--cyan)}
+.section-title{margin:3px 0 0;color:#e9f6ff;font-size:13px;letter-spacing:2px;border-left:3px solid var(--pink);padding:7px 10px;background:linear-gradient(90deg,#40103d66,transparent)}
+.envs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.env{padding:13px;text-align:center}
+.env h3{margin:0;font-size:23px;letter-spacing:3px}
+.env.dev h3{color:var(--green)}.env.qa h3{color:var(--cyan)}.env.prod h3{color:var(--purple)}
+.env-circle{width:70px;height:70px;border-radius:50%;margin:9px auto;border:2px solid currentColor;display:grid;place-items:center;font-size:22px;font-weight:bold;box-shadow:0 0 17px currentColor}
+.env p{font-size:10px;color:var(--muted);margin:5px}
+.pipeline{display:flex;align-items:center;gap:7px;padding:16px 12px}
+.node{flex:1;min-width:0;padding:13px 5px;text-align:center;border:1px solid #27546d;background:#07131e;color:var(--cyan);font-size:10px;font-weight:bold;letter-spacing:1px;transition:.25s}
+.node.active{background:#4a0c37;color:#fff;border-color:var(--pink);box-shadow:0 0 18px var(--pink)}
+.arrow{color:var(--pink);font-size:19px}
+.controls{text-align:center;padding:0 0 12px}
+.modules{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.module{padding:14px;min-height:104px}
+.module h3{margin:0 0 8px;color:var(--pink);font-size:11px;letter-spacing:1px}
+.module p{margin:0;color:#a8bdce;font-size:10px;line-height:1.8}
+.lower{display:grid;grid-template-columns:1.3fr 1fr;gap:10px}
+.terminal{padding:13px;color:#45ffb2;font:10px/1.8 monospace;min-height:150px;max-height:190px;overflow:auto}
+.rightbar .panel{min-width:0}
+.now{padding:12px;display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:center}
+.cover{width:90px;height:90px;object-fit:cover;border:1px solid var(--pink);box-shadow:0 0 12px #ff1bb966}
+.track-title{font-size:14px;font-weight:bold}.track-sub{color:#a8bdce;font-size:11px;margin-top:5px}
+.track-tag{color:var(--pink);font-size:10px;margin-top:8px;letter-spacing:1px}
+.progress{height:5px;background:#233344;margin-top:12px}.progress span{display:block;width:46%;height:100%;background:var(--red)}
+.player-controls{display:flex;justify-content:space-around;padding:10px;border-top:1px solid #203b50}
+.player-controls button{border:0;background:none;color:#c7d9e6;font-size:17px;cursor:pointer}
+.playlist{padding:5px 10px 10px}
+.song{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;padding:9px 2px;border-bottom:1px solid #1b3040;font-size:10px}
+.song.active{color:#ff547c;background:#4a102533}
+.song img{width:32px;height:32px;object-fit:cover}
+.song small{display:block;color:#8da4b9;margin-top:4px}
+.generator{padding:12px}
+.generator label{display:block;color:#9eb6c9;font-size:10px;margin:8px 0 4px}
+.generator select{width:100%;padding:9px;background:#080f1b;color:#e7f4ff;border:1px solid #3d536c;border-radius:4px}
+.generator .action{width:100%;margin-top:12px}
+.terminal-mini{padding:12px;font:10px/1.8 monospace;color:#4bffb2}
+.footer{margin:0 12px 12px;padding:13px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#9cb0c2;font:10px monospace;letter-spacing:1px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#160c24;border:1px solid var(--pink);padding:12px 18px;color:#fff;z-index:30;display:none;box-shadow:0 0 20px #e21bff66}
+@media(max-width:1150px){.layout{grid-template-columns:175px minmax(0,1fr)}.rightbar{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr)}.topbar{grid-template-columns:1fr 1fr}.top-center{display:none}}
+@media(max-width:760px){.topbar{height:auto;grid-template-columns:1fr;padding:10px}.top-status{justify-content:flex-start}.layout{display:flex;flex-direction:column;padding:8px}.sidebar{display:grid;grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.nav-label{grid-column:1/-1}.logo-card{display:none}.rightbar{display:flex}.metrics{grid-template-columns:repeat(2,1fr)}.modules{grid-template-columns:repeat(2,1fr)}.lower{grid-template-columns:1fr}.hero{min-height:220px}.hero-copy{max-width:100%}.hero h1{font-size:35px}.envs{gap:6px}.env{padding:9px 4px}.env h3{font-size:17px}.pipeline{flex-wrap:wrap}.node{min-width:28%}.arrow{display:none}}
+@media(max-width:430px){.modules{grid-template-columns:1fr}.brand-title{font-size:17px}.hero{padding:17px}.hero h1{font-size:29px}.env-circle{width:55px;height:55px}.footer{font-size:9px}}
 </style>
 </head>
-
 <body>
-
-<header>
- <div class="logo">☠ DIGITAL FACTORY // SKYNET</div>
- <div class="status">● SYSTEM ONLINE / OPERATOR CONNECTED</div>
+<header class="topbar">
+ <div class="brand">
+  <img src="assets/digital-factory-logo.jpg" alt="Logo Digital Factory">
+  <div class="brand-title">DIGITAL FACTORY<small>SKYNET // TERMINATOR COMMAND CENTER</small></div>
+ </div>
+ <div class="top-center">MUSIC &nbsp; // &nbsp; AI &nbsp; // &nbsp; NO LIMITS</div>
+ <div class="top-status"><span class="online">SYSTEM ONLINE</span><span id="clock">--:--:--</span></div>
 </header>
 
-<main class="container">
+<div class="layout">
+ <aside class="sidebar">
+  <section class="panel">
+   <nav class="nav" aria-label="Navegación">
+    <button class="active" data-section="inicio">⌂ &nbsp; INICIO</button>
+    <button data-section="explorar">⌕ &nbsp; EXPLORAR</button>
+    <button data-section="albums">▣ &nbsp; ÁLBUMES</button>
+    <button data-section="playlists">☷ &nbsp; PLAYLISTS</button>
+    <button data-section="radio">◉ &nbsp; RADIO NEURAL</button>
+    <button data-section="generador">⚙ &nbsp; GENERADOR</button>
+    <button data-section="config">⚙ &nbsp; CONFIGURACIÓN</button>
+    <div class="nav-label">GÉNEROS</div>
+    <button data-genre="Dark Synth">✥ &nbsp; DARK SYNTH</button>
+    <button data-genre="Industrial">✥ &nbsp; INDUSTRIAL</button>
+    <button data-genre="Cyberpunk">✥ &nbsp; CYBERPUNK</button>
+    <button data-genre="Dark Techno">✥ &nbsp; DARK TECHNO</button>
+    <button data-genre="Biomechanical">✥ &nbsp; BIOMECHANICAL</button>
+    <button data-genre="Ambient">✥ &nbsp; AMBIENT</button>
+    <button data-genre="Trance">✥ &nbsp; TRANCE</button>
+    <button data-genre="Metal">✥ &nbsp; METAL</button>
+   </nav>
+  </section>
+  <section class="panel logo-card">
+   <img src="assets/digital-factory-logo.jpg" alt="Emblema Digital Factory">
+   <strong>BUILD • CREATE • AUTOMATE</strong>
+  </section>
+ </aside>
 
-<!-- DIGITAL FACTORY HERO -->
+ <main class="main" id="inicio">
+  <section class="panel hero">
+   <div class="hero-copy">
+    <div class="eyebrow">BIENVENIDO A</div>
+    <h1>DIGITAL<br>FACTORY <span>2050</span></h1>
+    <p>SKYNET // TERMINATOR COMMAND CENTER</p>
+    <p>ON-PREMISE · AUTOMATION · DEVSECOPS</p>
+    <button class="action" onclick="notify('DIGITAL FACTORY // SYSTEM INITIALIZED')">▶ &nbsp; INITIALIZE SYSTEM</button>
+   </div>
+  </section>
 
-<section class="hero">
+  <section class="metrics">
+   <div class="panel metric"><label>GOVERNANCE SCORE</label><strong>96%</strong><div class="meter"><i></i></div><small>Indicador visual de referencia</small></div>
+   <div class="panel metric"><label>ENVIRONMENTS</label><strong>03</strong><small>DEV / QA / PROD</small></div>
+   <div class="panel metric"><label>AUTOMATION ENGINE</label><strong>ANSIBLE</strong><small>Configuration Management</small></div>
+   <div class="panel metric"><label>CI/CD PLATFORM</label><strong>GITHUB</strong><small>GitHub Actions</small></div>
+  </section>
 
- <h1>DIGITAL FACTORY</h1>
+  <h2 class="section-title">01 / ENVIRONMENT CONTROL</h2>
+  <section class="envs">
+   <div class="panel env dev"><h3>DEV</h3><div class="env-circle">01</div><p>● CONFIGURED</p></div>
+   <div class="panel env qa"><h3>QA</h3><div class="env-circle">02</div><p>● CONFIGURED</p></div>
+   <div class="panel env prod"><h3>PROD</h3><div class="env-circle">03</div><p>● CONFIGURED</p></div>
+  </section>
 
- <p>TERMINATOR T-800 // ANSIBLE GOVERNANCE COMMAND CENTER</p>
+  <h2 class="section-title">02 / SKYNET CI/CD PIPELINE</h2>
+  <section class="panel">
+   <div class="pipeline" id="pipeline">
+    <div class="node">◆<br>GIT PUSH</div><div class="arrow">››</div>
+    <div class="node">⚙<br>VALIDATION</div><div class="arrow">››</div>
+    <div class="node">◉<br>ANSIBLE</div><div class="arrow">››</div>
+    <div class="node">➤<br>DEPLOY</div><div class="arrow">››</div>
+    <div class="node">✓<br>VERIFY</div>
+   </div>
+   <div class="controls">
+    <button class="action" onclick="runPipeline()">▶ INITIATE SKYNET</button>
+    <button class="action" onclick="rollback()">↶ ROLLBACK</button>
+   </div>
+  </section>
 
- <p>ON-PREMISE · AUTOMATION · DEVSECOPS · GITHUB ACTIONS</p>
+  <h2 class="section-title">03 / GOVERNANCE & SECURITY</h2>
+  <section class="modules">
+   <div class="panel module"><h3>⬡ SECURITY GOVERNANCE</h3><p>Access Control<br>SSH Security<br>Least Privilege<br>Secrets Management</p></div>
+   <div class="panel module"><h3>▣ COMPLIANCE CONTROL</h3><p>Configuration Standards<br>Change Management<br>Infrastructure Baselines<br>Audit & Traceability</p></div>
+   <div class="panel module"><h3>⚙ INFRASTRUCTURE</h3><p>Linux Servers<br>Nginx Web Services<br>Network Configuration<br>On-Premise Architecture</p></div>
+   <div class="panel module"><h3>⇧ DELIVERY CONTROL</h3><p>Git Version Control<br>GitHub Actions<br>Deployment Validation<br>Release Management</p></div>
+   <div class="panel module"><h3>◉ OBSERVABILITY</h3><p>Service Health<br>Execution Logs<br>HTTP Validation<br>Operational Monitoring</p></div>
+   <div class="panel module"><h3>⌘ CONFIGURATION MANAGEMENT</h3><p>Ansible Playbooks<br>Roles & Variables<br>Jinja2 Templates<br>Inventory Management</p></div>
+  </section>
 
- <div class="eye-container">
-  <div class="robot-eye">
-   <div class="lens"></div>
-   <div class="scanner"></div>
-  </div>
- </div>
+  <section class="lower">
+   <div>
+    <h2 class="section-title">04 / SKYNET EXECUTION TERMINAL</h2>
+    <div class="panel terminal" id="terminal">
+     [SYSTEM] DIGITAL FACTORY INITIALIZED<br>
+     [CORE] T-800 CONTROL SYSTEM ONLINE<br>
+     [INFO] ON-PREMISE ARCHITECTURE LOADED<br>
+     [INFO] DEV / QA / PROD CONFIGURED<br>
+     [READY] AWAITING OPERATOR COMMAND...
+    </div>
+   </div>
+   <div>
+    <h2 class="section-title">05 / SYSTEM GENERATOR</h2>
+    <div class="panel generator">
+     <label for="genre">GENRE</label><select id="genre"><option>Cyberpunk</option><option>Dark Synth</option><option>Industrial</option><option>Biomechanical</option><option>Dark Techno</option></select>
+     <label for="intensity">INTENSIDAD</label><select id="intensity"><option>Media</option><option>Alta</option><option>Extrema</option></select>
+     <label for="ambience">AMBIENTE</label><select id="ambience"><option>Urbano / Nocturno</option><option>Industrial / Apocalíptico</option><option>Espacial / Futurista</option></select>
+     <button class="action" onclick="generate()">✦ GENERAR CONCEPTO</button>
+    </div>
+   </div>
+  </section>
+ </main>
 
- <div class="core-label">
-  SKYNET ARTIFICIAL INTELLIGENCE<br>
-  INFRASTRUCTURE MONITORING ACTIVE
- </div>
+ <aside class="rightbar">
+  <section class="panel">
+   <div class="panel-head">♫ &nbsp; REPRODUCIENDO AHORA</div>
+   <div class="now">
+    <img class="cover" src="assets/digital-factory-logo.jpg" alt="Carátula">
+    <div><div class="track-title" id="trackTitle">Cyber Heart</div><div class="track-sub">Neural Drift</div><div class="track-tag">DARK SYNTH</div><div class="progress"><span id="progress"></span></div><small>02:34 / 05:12</small></div>
+   </div>
+   <div class="player-controls"><button onclick="notify('SHUFFLE ACTIVADO')">⤨</button><button onclick="changeTrack(-1)">|◀</button><button onclick="togglePlay()" id="playButton">Ⅱ</button><button onclick="changeTrack(1)">▶|</button><button onclick="notify('VOLUMEN DEL SISTEMA: 72%')">◖))</button></div>
+  </section>
 
-</section>
+  <section class="panel">
+   <div class="panel-head">♬ &nbsp; PLAYLIST NEURAL</div>
+   <div class="playlist" id="playlist">
+    <div class="song active"><img src="assets/digital-factory-logo.jpg"><div>Cyber Heart<small>Neural Drift</small></div><span>05:12</span></div>
+    <div class="song"><img src="assets/digital-factory-logo.jpg"><div>Digital Collapse<small>Void Structure</small></div><span>04:37</span></div>
+    <div class="song"><img src="assets/digital-factory-logo.jpg"><div>Last Transmission<small>Synthetic Souls</small></div><span>06:21</span></div>
+    <div class="song"><img src="assets/digital-factory-logo.jpg"><div>Industrial Pulse<small>The Machine</small></div><span>05:03</span></div>
+    <div class="song"><img src="assets/digital-factory-logo.jpg"><div>Human Error<small>Biomechanic</small></div><span>04:58</span></div>
+   </div>
+  </section>
 
-<!-- METRICS -->
-
-<div class="grid">
-
- <div class="card">
-  <h3>GOVERNANCE SCORE</h3>
-  <div class="metric">96%</div>
-  <div class="bar"><span></span></div>
-  <small>Visual reference indicator</small>
- </div>
-
- <div class="card">
-  <h3>ENVIRONMENTS</h3>
-  <div class="metric">03</div>
-  <small>DEV / QA / PROD</small>
- </div>
-
- <div class="card">
-  <h3>AUTOMATION ENGINE</h3>
-  <div class="metric">ANSIBLE</div>
-  <small>Configuration Management</small>
- </div>
-
- <div class="card">
-  <h3>CI/CD PLATFORM</h3>
-  <div class="metric">GITHUB</div>
-  <small>GitHub Actions</small>
- </div>
-
+  <section class="panel">
+   <div class="panel-head">⌘ &nbsp; CYBER TERMINAL</div>
+   <div class="terminal-mini" id="miniTerminal">
+    T-00:01:22 &nbsp; AUDIO CORE INITIALIZED<br>
+    T-00:01:27 &nbsp; TRACK LOADED: CYBER HEART<br>
+    T-00:03:14 &nbsp; NEURAL SIGNAL DETECTED<br>
+    T-00:04:02 &nbsp; PLAYLIST UPDATED<br>
+    T-00:05:01 &nbsp; SYSTEM STABLE
+   </div>
+  </section>
+ </aside>
 </div>
 
-<!-- ENVIRONMENTS -->
-
-<h2 class="section-title">01 / ENVIRONMENT CONTROL</h2>
-
-<div class="environment">
-
- <div class="env">
-  <h2>DEV</h2>
-  <div class="circle">01</div>
-  <p>Development Environment</p>
-  <span>● CONFIGURED</span>
- </div>
-
- <div class="env">
-  <h2>QA</h2>
-  <div class="circle">02</div>
-  <p>Quality Assurance</p>
-  <span>● CONFIGURED</span>
- </div>
-
- <div class="env">
-  <h2>PROD</h2>
-  <div class="circle">03</div>
-  <p>Production Environment</p>
-  <span>● CONFIGURED</span>
- </div>
-
-</div>
-
-<!-- PIPELINE -->
-
-<h2 class="section-title">02 / SKYNET CI/CD PIPELINE</h2>
-
-<div class="card">
-
- <div class="pipeline">
-
-  <div class="node">GIT PUSH</div>
-  <div class="arrow">›</div>
-
-  <div class="node">VALIDATION</div>
-  <div class="arrow">›</div>
-
-  <div class="node">ANSIBLE</div>
-  <div class="arrow">›</div>
-
-  <div class="node">DEPLOY</div>
-  <div class="arrow">›</div>
-
-  <div class="node">VERIFY</div>
-
- </div>
-
- <br>
-
- <center>
-  <button onclick="runPipeline()">▶ INITIATE SKYNET</button>
-  <button onclick="rollback()">↶ ROLLBACK</button>
- </center>
-
-</div>
-
-<!-- GOVERNANCE -->
-
-<h2 class="section-title">03 / GOVERNANCE & SECURITY</h2>
-
-<div class="modules">
-
- <div class="module">
-  <h3>◈ CONFIGURATION MANAGEMENT</h3>
-  <p>
-   Ansible Playbooks<br>
-   Roles & Variables<br>
-   Jinja2 Templates<br>
-   Inventory Management
-  </p>
- </div>
-
- <div class="module">
-  <h3>◈ SECURITY GOVERNANCE</h3>
-  <p>
-   Access Control<br>
-   SSH Security<br>
-   Least Privilege<br>
-   Secrets Management
-  </p>
- </div>
-
- <div class="module">
-  <h3>◈ COMPLIANCE CONTROL</h3>
-  <p>
-   Configuration Standards<br>
-   Change Management<br>
-   Infrastructure Baselines<br>
-   Audit & Traceability
-  </p>
- </div>
-
- <div class="module">
-  <h3>◈ INFRASTRUCTURE</h3>
-  <p>
-   Linux Servers<br>
-   Nginx Web Services<br>
-   Network Configuration<br>
-   On-Premise Architecture
-  </p>
- </div>
-
- <div class="module">
-  <h3>◈ DELIVERY CONTROL</h3>
-  <p>
-   Git Version Control<br>
-   GitHub Actions<br>
-   Deployment Validation<br>
-   Release Management
-  </p>
- </div>
-
- <div class="module">
-  <h3>◈ OBSERVABILITY</h3>
-  <p>
-   Service Health<br>
-   Execution Logs<br>
-   HTTP Validation<br>
-   Operational Monitoring
-  </p>
- </div>
-
-</div>
-
-<!-- TERMINAL -->
-
-<h2 class="section-title">04 / SKYNET EXECUTION TERMINAL</h2>
-
-<div class="logs" id="logs">
-[SYSTEM] DIGITAL FACTORY INITIALIZED<br>
-[CORE] T-800 CONTROL SYSTEM ONLINE<br>
-[INFO] ON-PREMISE ARCHITECTURE LOADED<br>
-[INFO] DEV / QA / PROD CONFIGURED<br>
-[INFO] GITHUB ACTIONS REGISTERED<br>
-[READY] AWAITING OPERATOR COMMAND...
-</div>
-
-</main>
-
-<footer>
- DIGITAL FACTORY // SKYNET TERMINATOR COMMAND CENTER<br>
- T-800 INFRASTRUCTURE GOVERNANCE · DEVSECOPS · PLATFORM ENGINEERING<br>
- SYSTEM STATUS: VISUAL DEMONSTRATION
+<footer class="panel footer">
+ <span>DIGITAL FACTORY // SKYNET 2050 · STREAMING THE FUTURE</span>
+ <span>BUILD • AUTOMATE • PROTECT &nbsp; | &nbsp; GITHUB &nbsp; | &nbsp; PRIVACY &nbsp; | &nbsp; CONTACTO</span>
 </footer>
+<div class="toast" id="toast"></div>
 
 <script>
-
-const logs = document.getElementById("logs");
-const nodes = document.querySelectorAll(".node");
-
-let pipelineTimer = null;
-
-function addLog(message) {
-
- const line = document.createElement("div");
-
- line.textContent = "[SKYNET] " + message;
-
- logs.appendChild(line);
-
- logs.scrollTop = logs.scrollHeight;
-
+const terminal=document.getElementById('terminal');
+let timer=null,playing=true,currentTrack=0;
+const tracks=['Cyber Heart','Digital Collapse','Last Transmission','Industrial Pulse','Human Error'];
+function log(message){const line=document.createElement('div');line.textContent='[SKYNET] '+message;terminal.appendChild(line);terminal.scrollTop=terminal.scrollHeight;}
+function notify(message){const t=document.getElementById('toast');t.textContent=message;t.style.display='block';setTimeout(()=>t.style.display='none',2200);log(message);}
+function runPipeline(){
+ if(timer)clearInterval(timer);
+ const nodes=[...document.querySelectorAll('.node')];nodes.forEach(n=>n.classList.remove('active'));
+ terminal.innerHTML='';log('PIPELINE DEMONSTRATION STARTED');
+ const steps=['GIT PUSH DETECTED','ANSIBLE SYNTAX VALIDATION','INVENTORY DEV / QA / PROD LOADED','CONFIGURATION MANAGEMENT','DEPLOYMENT VERIFICATION','DEMO COMPLETED — NO REAL DEPLOYMENT'];
+ let i=0;timer=setInterval(()=>{if(i>=steps.length){clearInterval(timer);timer=null;return;}if(i<nodes.length)nodes[i].classList.add('active');log(steps[i++]);},850);
 }
-
-function runPipeline() {
-
- if(pipelineTimer) {
-  clearInterval(pipelineTimer);
- }
-
- nodes.forEach(node => node.classList.remove("active"));
-
- logs.innerHTML = "";
-
- addLog("INITIATING PIPELINE...");
- addLog("OPERATOR COMMAND ACCEPTED");
-
- const steps = [
-  "GIT PUSH DETECTED",
-  "ANSIBLE SYNTAX VALIDATION",
-  "DEV / QA / PROD INVENTORY LOADED",
-  "CONFIGURATION MANAGEMENT",
-  "DEPLOYMENT VERIFICATION",
-  "PIPELINE COMPLETED"
- ];
-
- let i = 0;
-
- pipelineTimer = setInterval(() => {
-
-  if(i >= steps.length) {
-
-   clearInterval(pipelineTimer);
-   pipelineTimer = null;
-
-   addLog("DEMO FINISHED");
-   addLog("NO REAL DEPLOYMENT EXECUTED");
-
-   return;
-  }
-
-  if(i < nodes.length) {
-   nodes[i].classList.add("active");
-  }
-
-  addLog(steps[i]);
-
-  i++;
-
- },850);
-
-}
-
-function rollback() {
-
- if(pipelineTimer) {
-  clearInterval(pipelineTimer);
-  pipelineTimer = null;
- }
-
- nodes.forEach(node => node.classList.remove("active"));
-
- addLog("!!! ROLLBACK PROTOCOL INITIATED");
- addLog("PREVIOUS CONFIGURATION RESTORATION SIMULATED");
- addLog("SIMULATION ONLY - NO SERVER CONFIGURATION CHANGED");
-
-}
-
+function rollback(){if(timer){clearInterval(timer);timer=null;}document.querySelectorAll('.node').forEach(n=>n.classList.remove('active'));log('ROLLBACK PROTOCOL REQUESTED');log('SIMULATION ONLY — NO SERVER CONFIGURATION CHANGED');}
+function togglePlay(){playing=!playing;document.getElementById('playButton').textContent=playing?'Ⅱ':'▶';notify(playing?'REPRODUCCIÓN REANUDADA':'REPRODUCCIÓN EN PAUSA');}
+function changeTrack(direction){currentTrack=(currentTrack+direction+tracks.length)%tracks.length;document.getElementById('trackTitle').textContent=tracks[currentTrack];document.querySelectorAll('.song').forEach((s,i)=>s.classList.toggle('active',i===currentTrack));notify('TRACK: '+tracks[currentTrack]);}
+function generate(){const g=document.getElementById('genre').value,i=document.getElementById('intensity').value,a=document.getElementById('ambience').value;notify('CONCEPTO GENERADO: '+g+' / '+i+' / '+a);document.getElementById('miniTerminal').innerHTML+=' <br>NEURAL PROMPT: '+g+' · '+i+' · '+a;}
+document.querySelectorAll('.nav button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));button.classList.add('active');if(button.dataset.genre){document.getElementById('genre').value=button.dataset.genre;notify('GÉNERO SELECCIONADO: '+button.dataset.genre);}else{notify('MÓDULO: '+button.textContent.trim());}}));
+function updateClock(){document.getElementById('clock').textContent=new Date().toLocaleString('es-CL',{dateStyle:'short',timeStyle:'medium'});}
+updateClock();setInterval(updateClock,1000);
 </script>
-
 </body>
 </html>
