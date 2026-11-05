@@ -3,258 +3,379 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ANSIBLE GOVERNANCE COMMAND CENTER</title>
+<title>SKYNET | ANSIBLE TERMINATOR COMMAND</title>
 
 <style>
 :root {
-  --bg:#070b14;
-  --panel:#101827;
-  --panel2:#0c1421;
-  --line:#25364b;
-  --cyan:#00e5ff;
-  --blue:#3985ff;
-  --purple:#b388ff;
-  --green:#00e5a0;
-  --orange:#ffb454;
-  --red:#ff5577;
-  --text:#e6edf7;
-  --muted:#8293a9;
+  --bg:#050505;
+  --panel:#111315;
+  --panel2:#191b1d;
+  --line:#49302c;
+  --red:#ff2525;
+  --red2:#a00000;
+  --orange:#ff6a00;
+  --steel:#aeb4b8;
+  --text:#e5e5e5;
+  --muted:#858585;
+  --green:#ff3b22;
 }
 
 *{box-sizing:border-box}
 
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
+ margin:0;
+ background:
+ radial-gradient(ellipse at 50% 0%,#35100d 0%,transparent 45%),
+ linear-gradient(180deg,#080808,#030303);
+ color:var(--text);
+ font-family:Arial,sans-serif;
+}
+
+body:before {
+ content:"";
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ z-index:10;
+ background:repeating-linear-gradient(
+ transparent 0px,
+ rgba(255,30,20,.025) 1px,
+ transparent 3px
+ );
 }
 
 header {
-  padding:22px 30px;
-  background:#0b1220;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:15px;
+ padding:20px 30px;
+ background:linear-gradient(90deg,#080808,#1b0b09,#080808);
+ border-bottom:2px solid var(--red);
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
+ box-shadow:0 5px 25px #ff000022;
 }
 
 .logo {
-  color:var(--cyan);
-  font-size:20px;
-  font-weight:bold;
-  letter-spacing:2px;
+ color:var(--red);
+ font-size:20px;
+ font-weight:900;
+ letter-spacing:3px;
+ text-shadow:0 0 15px red;
 }
 
 .status {
-  color:var(--green);
-  font-size:12px;
+ color:#ff4949;
+ font-size:11px;
+ letter-spacing:2px;
+ animation:blink 1.5s infinite;
 }
 
 .container {
-  padding:25px;
-  max-width:1500px;
-  margin:auto;
+ padding:25px;
+ max-width:1500px;
+ margin:auto;
 }
 
 .hero {
-  padding:30px;
-  border:1px solid var(--line);
-  background:linear-gradient(120deg,#111e32,#101322,#17102c);
-  border-radius:12px;
-  margin-bottom:22px;
+ position:relative;
+ overflow:hidden;
+ padding:35px;
+ border:1px solid #79302a;
+ background:
+ linear-gradient(110deg,#190b09,#111315 55%,#260c08);
+ margin-bottom:25px;
+ box-shadow:inset 0 0 35px #ff180c18;
+}
+
+.hero:after {
+ content:"T-800";
+ position:absolute;
+ right:35px;
+ top:35px;
+ font-size:65px;
+ font-weight:900;
+ color:#ff252510;
+ letter-spacing:8px;
 }
 
 .hero h1 {
-  font-size:30px;
-  color:var(--cyan);
-  margin:0 0 10px;
+ font-size:30px;
+ color:var(--red);
+ margin:0 0 12px;
+ letter-spacing:3px;
+ text-shadow:0 0 15px #ff000088;
 }
 
-.hero p {color:var(--muted)}
+.hero p {
+ color:#aaa;
+ font-size:13px;
+ letter-spacing:1px;
+}
+
+/* ROBOT EYE */
+
+.eye-container {
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ margin:35px auto;
+}
+
+.robot-eye {
+ width:125px;
+ height:125px;
+ border:2px solid #6c2520;
+ border-radius:50%;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:radial-gradient(circle,#29100d,#080808 70%);
+ box-shadow:0 0 25px #ff000044,inset 0 0 25px #ff000022;
+ position:relative;
+}
+
+.robot-eye:before,
+.robot-eye:after {
+ content:"";
+ position:absolute;
+ border:1px solid #ff252555;
+ border-radius:50%;
+}
+
+.robot-eye:before {
+ width:105px;
+ height:105px;
+}
+
+.robot-eye:after {
+ width:85px;
+ height:85px;
+ border-style:dashed;
+ animation:spin 12s linear infinite;
+}
+
+.lens {
+ width:35px;
+ height:35px;
+ background:radial-gradient(circle,#fff 0%,#ff8585 12%,#ff0000 35%,#780000 75%);
+ border-radius:50%;
+ box-shadow:0 0 15px red,0 0 35px red;
+ animation:eyePulse 1.5s infinite alternate;
+}
 
 .grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:22px;
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:15px;
+ margin-bottom:22px;
 }
 
-.card {
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:20px;
+.card,.env,.module {
+ background:linear-gradient(145deg,#191b1d,#0a0b0c);
+ border:1px solid #49302c;
+ border-radius:4px;
+ padding:20px;
+ box-shadow:inset 0 0 15px #ff000008;
+ transition:.3s;
+}
+
+.card:hover,.module:hover,.env:hover {
+ border-color:var(--red);
+ box-shadow:0 0 20px #ff000022;
+ transform:translateY(-3px);
 }
 
 .card h3 {
-  font-size:12px;
-  color:var(--muted);
-  letter-spacing:1px;
+ font-size:11px;
+ color:#999;
+ letter-spacing:2px;
 }
 
 .metric {
-  font-size:30px;
-  font-weight:bold;
-  margin:12px 0;
+ font-size:29px;
+ font-weight:bold;
+ margin:12px 0;
+ color:var(--red);
+ text-shadow:0 0 12px #ff000055;
 }
 
-.cyan{color:var(--cyan)}
-.green{color:var(--green)}
-.purple{color:var(--purple)}
-.orange{color:var(--orange)}
+.cyan,.green,.purple,.orange {
+ color:var(--red)!important;
+}
 
 .section-title {
-  color:var(--cyan);
-  font-size:15px;
-  letter-spacing:2px;
-  margin:30px 0 15px;
+ color:var(--red);
+ font-size:14px;
+ letter-spacing:3px;
+ margin:32px 0 15px;
+ border-left:3px solid red;
+ padding-left:12px;
 }
 
 .environment {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
 }
 
 .env {
-  background:var(--panel);
-  border:1px solid var(--line);
-  padding:23px;
-  border-radius:10px;
-  text-align:center;
+ text-align:center;
 }
 
 .env h2 {
-  font-size:23px;
-  letter-spacing:2px;
+ font-size:23px;
+ letter-spacing:4px;
+ color:var(--red);
 }
 
 .circle {
-  width:105px;
-  height:105px;
-  margin:15px auto;
-  border-radius:50%;
-  border:5px solid var(--green);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:20px;
-  font-weight:bold;
-  box-shadow:0 0 18px #00e5a033;
+ width:105px;
+ height:105px;
+ margin:15px auto;
+ border-radius:50%;
+ border:3px solid var(--red);
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:25px;
+ font-weight:bold;
+ color:white;
+ box-shadow:0 0 20px #ff000033,inset 0 0 20px #ff000022;
 }
 
 .pipeline {
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ gap:10px;
+ flex-wrap:wrap;
 }
 
 .node {
-  flex:1;
-  min-width:115px;
-  padding:20px 10px;
-  text-align:center;
-  border:1px solid var(--cyan);
-  background:#0b1b2a;
-  border-radius:9px;
-  color:var(--cyan);
+ flex:1;
+ min-width:115px;
+ padding:20px 10px;
+ text-align:center;
+ border:1px solid #96352e;
+ background:linear-gradient(145deg,#230d0b,#090909);
+ color:#ff4545;
+ font-size:12px;
+ font-weight:bold;
+ letter-spacing:1px;
+ transition:.3s;
+}
+
+.node.active {
+ background:#700900;
+ color:white;
+ box-shadow:0 0 25px red;
+ border-color:white;
 }
 
 .arrow {
-  color:var(--purple);
-  font-size:24px;
+ color:var(--red);
+ font-size:24px;
 }
 
 .modules {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.module {
-  padding:22px;
-  border:1px solid var(--line);
-  background:var(--panel);
-  border-radius:10px;
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:15px;
 }
 
 .module h3 {
-  color:var(--purple);
+ color:var(--red);
+ font-size:13px;
+ letter-spacing:1px;
 }
 
 .module p {
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.7;
+ color:#aaa;
+ font-size:13px;
+ line-height:1.8;
 }
 
 .bar {
-  height:8px;
-  background:#263348;
-  border-radius:10px;
-  overflow:hidden;
-  margin:12px 0;
+ height:8px;
+ background:#302020;
+ overflow:hidden;
+ margin:12px 0;
 }
 
 .bar span {
-  display:block;
-  height:100%;
-  width:96%;
-  background:var(--green);
+ display:block;
+ height:100%;
+ width:96%;
+ background:linear-gradient(90deg,#700000,#ff2929);
+ box-shadow:0 0 15px red;
 }
 
 button {
-  padding:12px 20px;
-  border:1px solid var(--cyan);
-  background:#10273a;
-  color:var(--cyan);
-  cursor:pointer;
-  border-radius:6px;
-  font-weight:bold;
-  margin:5px;
+ padding:13px 22px;
+ border:1px solid var(--red);
+ background:#210907;
+ color:#ff4444;
+ cursor:pointer;
+ font-weight:bold;
+ letter-spacing:1px;
+ margin:5px;
+ transition:.3s;
 }
 
 button:hover {
-  background:var(--cyan);
-  color:#06101b;
+ background:var(--red);
+ color:white;
+ box-shadow:0 0 20px red;
 }
 
 .logs {
-  background:#050a12;
-  border:1px solid var(--line);
-  padding:18px;
-  border-radius:8px;
-  color:var(--green);
-  font-family:monospace;
-  font-size:12px;
-  line-height:2;
-  min-height:110px;
+ background:#030303;
+ border:1px solid #6b211b;
+ padding:18px;
+ color:#ff4545;
+ font-family:monospace;
+ font-size:12px;
+ line-height:2;
+ min-height:130px;
+ max-height:220px;
+ overflow:auto;
+ box-shadow:inset 0 0 25px #ff000011;
 }
 
 footer {
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  border-top:1px solid var(--line);
-  margin-top:40px;
-  font-size:12px;
+ text-align:center;
+ padding:30px;
+ color:#777;
+ border-top:1px solid #48201c;
+ margin-top:40px;
+ font-size:11px;
+ letter-spacing:2px;
+}
+
+@keyframes blink {
+ 50%{opacity:.35}
+}
+
+@keyframes spin {
+ to{transform:rotate(360deg)}
+}
+
+@keyframes eyePulse {
+ from{box-shadow:0 0 10px red}
+ to{box-shadow:0 0 35px red,0 0 55px #ff000088}
 }
 
 @media(max-width:900px) {
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .modules{grid-template-columns:repeat(2,1fr)}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .modules{grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px) {
-  .container{padding:12px}
-  .grid,.environment,.modules{grid-template-columns:1fr}
-  .hero h1{font-size:23px}
+ .container{padding:12px}
+ .grid,.environment,.modules{grid-template-columns:1fr}
+ .hero h1{font-size:22px}
+ .hero:after{display:none}
 }
 </style>
 </head>
@@ -262,48 +383,54 @@ footer {
 <body>
 
 <header>
-  <div class="logo">◈ ANSIBLE GOVERNANCE</div>
-  <div class="status">● COMMAND CENTER / DEMO VISUAL</div>
+ <div class="logo">☠ SKYNET // TERMINATOR</div>
+ <div class="status">● SYSTEM ONLINE / OPERATOR CONNECTED</div>
 </header>
 
 <main class="container">
 
 <section class="hero">
-  <h1>INFRASTRUCTURE GOVERNANCE CENTER</h1>
-  <p>
-    Enterprise On-Premise Infrastructure · Automation · Security · Compliance
-  </p>
-  <p>
-    CONTROL PLANE / ANSIBLE / GITHUB ACTIONS / NGINX
-  </p>
+ <h1>ANSIBLE GOVERNANCE COMMAND</h1>
+ <p>TERMINATOR T-800 // INFRASTRUCTURE CONTROL SYSTEM</p>
+ <p>ON-PREMISE · AUTOMATION · DEVSECOPS · GITHUB ACTIONS</p>
+
+ <div class="eye-container">
+  <div class="robot-eye">
+   <div class="lens"></div>
+  </div>
+ </div>
+
+ <center style="color:#ff3939;font-size:11px;letter-spacing:3px">
+  SKYNET ARTIFICIAL INTELLIGENCE // MONITORING ACTIVE
+ </center>
 </section>
 
 <div class="grid">
 
-  <div class="card">
-    <h3>GOVERNANCE SCORE</h3>
-    <div class="metric cyan">96%</div>
-    <div class="bar"><span></span></div>
-    <small>Indicador visual de referencia</small>
-  </div>
+ <div class="card">
+  <h3>GOVERNANCE SCORE</h3>
+  <div class="metric">96%</div>
+  <div class="bar"><span></span></div>
+  <small>Visual reference indicator</small>
+ </div>
 
-  <div class="card">
-    <h3>ENVIRONMENTS</h3>
-    <div class="metric green">03</div>
-    <small>DEV / QA / PROD</small>
-  </div>
+ <div class="card">
+  <h3>ENVIRONMENTS</h3>
+  <div class="metric">03</div>
+  <small>DEV / QA / PROD</small>
+ </div>
 
-  <div class="card">
-    <h3>AUTOMATION ENGINE</h3>
-    <div class="metric purple">ANSIBLE</div>
-    <small>Configuration Management</small>
-  </div>
+ <div class="card">
+  <h3>AUTOMATION ENGINE</h3>
+  <div class="metric">ANSIBLE</div>
+  <small>Configuration Management</small>
+ </div>
 
-  <div class="card">
-    <h3>CI/CD PLATFORM</h3>
-    <div class="metric orange">GITHUB</div>
-    <small>GitHub Actions</small>
-  </div>
+ <div class="card">
+  <h3>CI/CD PLATFORM</h3>
+  <div class="metric">GITHUB</div>
+  <small>GitHub Actions</small>
+ </div>
 
 </div>
 
@@ -311,51 +438,50 @@ footer {
 
 <div class="environment">
 
-  <div class="env">
-    <h2 class="green">DEV</h2>
-    <div class="circle">01</div>
-    <p>Development Environment</p>
-    <span class="green">● CONFIGURED</span>
-  </div>
+ <div class="env">
+  <h2>DEV</h2>
+  <div class="circle">01</div>
+  <p>Development Environment</p>
+  <span class="green">● CONFIGURED</span>
+ </div>
 
-  <div class="env">
-    <h2 class="cyan">QA</h2>
-    <div class="circle" style="border-color:var(--cyan)">02</div>
-    <p>Quality Assurance</p>
-    <span class="cyan">● CONFIGURED</span>
-  </div>
+ <div class="env">
+  <h2>QA</h2>
+  <div class="circle">02</div>
+  <p>Quality Assurance</p>
+  <span class="green">● CONFIGURED</span>
+ </div>
 
-  <div class="env">
-    <h2 class="purple">PROD</h2>
-    <div class="circle" style="border-color:var(--purple)">03</div>
-    <p>Production Environment</p>
-    <span class="purple">● CONFIGURED</span>
-  </div>
+ <div class="env">
+  <h2>PROD</h2>
+  <div class="circle">03</div>
+  <p>Production Environment</p>
+  <span class="green">● CONFIGURED</span>
+ </div>
 
 </div>
 
-<h2 class="section-title">02 / CI/CD AUTOMATION PIPELINE</h2>
+<h2 class="section-title">02 / SKYNET CI/CD PIPELINE</h2>
 
 <div class="card">
 
-  <div class="pipeline">
-    <div class="node">GIT PUSH</div>
-    <div class="arrow">›</div>
-    <div class="node">VALIDATION</div>
-    <div class="arrow">›</div>
-    <div class="node">ANSIBLE</div>
-    <div class="arrow">›</div>
-    <div class="node">DEPLOY</div>
-    <div class="arrow">›</div>
-    <div class="node">VERIFY</div>
-  </div>
+ <div class="pipeline">
+  <div class="node">GIT PUSH</div>
+  <div class="arrow">›</div>
+  <div class="node">VALIDATION</div>
+  <div class="arrow">›</div>
+  <div class="node">ANSIBLE</div>
+  <div class="arrow">›</div>
+  <div class="node">DEPLOY</div>
+  <div class="arrow">›</div>
+  <div class="node">VERIFY</div>
+ </div>
 
-  <br>
-
-  <center>
-    <button onclick="runPipeline()">▶ SIMULATE PIPELINE</button>
-    <button onclick="rollback()">↶ ROLLBACK DEMO</button>
-  </center>
+ <br>
+ <center>
+  <button onclick="runPipeline()">▶ INITIATE SKYNET</button>
+  <button onclick="rollback()">↶ ROLLBACK</button>
+ </center>
 
 </div>
 
@@ -363,121 +489,118 @@ footer {
 
 <div class="modules">
 
-  <div class="module">
-    <h3>◈ CONFIGURATION MANAGEMENT</h3>
-    <p>
-      Ansible Playbooks<br>
-      Roles & Variables<br>
-      Jinja2 Templates<br>
-      Inventory Management
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ CONFIGURATION MANAGEMENT</h3>
+  <p>Ansible Playbooks<br>Roles & Variables<br>Jinja2 Templates<br>Inventory Management</p>
+ </div>
 
-  <div class="module">
-    <h3>◈ SECURITY GOVERNANCE</h3>
-    <p>
-      Access Control<br>
-      SSH Security<br>
-      Least Privilege<br>
-      Secrets Management
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ SECURITY GOVERNANCE</h3>
+  <p>Access Control<br>SSH Security<br>Least Privilege<br>Secrets Management</p>
+ </div>
 
-  <div class="module">
-    <h3>◈ COMPLIANCE CONTROL</h3>
-    <p>
-      Configuration Standards<br>
-      Change Management<br>
-      Infrastructure Baselines<br>
-      Audit & Traceability
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ COMPLIANCE CONTROL</h3>
+  <p>Configuration Standards<br>Change Management<br>Infrastructure Baselines<br>Audit & Traceability</p>
+ </div>
 
-  <div class="module">
-    <h3>◈ INFRASTRUCTURE</h3>
-    <p>
-      Linux Servers<br>
-      Nginx Web Services<br>
-      Network Configuration<br>
-      On-Premise Architecture
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ INFRASTRUCTURE</h3>
+  <p>Linux Servers<br>Nginx Web Services<br>Network Configuration<br>On-Premise Architecture</p>
+ </div>
 
-  <div class="module">
-    <h3>◈ DELIVERY CONTROL</h3>
-    <p>
-      Git Version Control<br>
-      GitHub Actions<br>
-      Deployment Validation<br>
-      Release Management
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ DELIVERY CONTROL</h3>
+  <p>Git Version Control<br>GitHub Actions<br>Deployment Validation<br>Release Management</p>
+ </div>
 
-  <div class="module">
-    <h3>◈ OBSERVABILITY</h3>
-    <p>
-      Service Health<br>
-      Execution Logs<br>
-      HTTP Validation<br>
-      Operational Monitoring
-    </p>
-  </div>
+ <div class="module">
+  <h3>◈ OBSERVABILITY</h3>
+  <p>Service Health<br>Execution Logs<br>HTTP Validation<br>Operational Monitoring</p>
+ </div>
 
 </div>
 
-<h2 class="section-title">04 / EXECUTION TERMINAL</h2>
+<h2 class="section-title">04 / SKYNET EXECUTION TERMINAL</h2>
 
 <div class="logs" id="logs">
-  [SYSTEM] ANSIBLE GOVERNANCE CENTER INITIALIZED<br>
-  [INFO] On-Premise architecture loaded<br>
-  [INFO] DEV / QA / PROD inventory configured<br>
-  [INFO] GitHub Actions workflow registered<br>
-  [READY] Waiting for operator command...
+[SYSTEM] SKYNET INITIALIZED<br>
+[CORE] T-800 CONTROL SYSTEM ONLINE<br>
+[INFO] ON-PREMISE ARCHITECTURE LOADED<br>
+[INFO] DEV / QA / PROD CONFIGURED<br>
+[INFO] GITHUB ACTIONS REGISTERED<br>
+[READY] AWAITING OPERATOR COMMAND...
 </div>
 
 </main>
 
 <footer>
-  ANSIBLE SENIOR CI/CD LAB · INFRASTRUCTURE GOVERNANCE<br>
-  ON-PREMISE AUTOMATION · DEVSECOPS · PLATFORM ENGINEERING
+ SKYNET // ANSIBLE TERMINATOR COMMAND CENTER<br>
+ T-800 INFRASTRUCTURE GOVERNANCE · DEVSECOPS · PLATFORM ENGINEERING
 </footer>
 
 <script>
 const logs = document.getElementById("logs");
+let pipelineTimer = null;
 
 function addLog(message) {
-  logs.innerHTML += "<br>[SYSTEM] " + message;
-  logs.scrollTop = logs.scrollHeight;
+ logs.innerHTML += "<br>[SKYNET] " + message;
+ logs.scrollTop = logs.scrollHeight;
 }
 
 function runPipeline() {
-  logs.innerHTML = "[PIPELINE] Starting visual demonstration...";
-  const steps = [
-    "Git push detected",
-    "Ansible syntax validation",
-    "Inventory DEV / QA / PROD loaded",
-    "Configuration management",
-    "Deployment verification",
-    "Visual pipeline completed"
-  ];
 
-  let i = 0;
+ if(pipelineTimer) clearInterval(pipelineTimer);
 
-  const timer = setInterval(() => {
-    if (i >= steps.length) {
-      clearInterval(timer);
-      addLog("DEMO FINISHED - no real deployment executed");
-      return;
-    }
+ logs.innerHTML = "[SKYNET] INITIATING PIPELINE...";
 
-    addLog(steps[i]);
-    i++;
-  }, 850);
+ const nodes = document.querySelectorAll(".node");
+ nodes.forEach(n => n.classList.remove("active"));
+
+ const steps = [
+  "GIT PUSH DETECTED",
+  "ANSIBLE SYNTAX VALIDATION",
+  "DEV / QA / PROD INVENTORY LOADED",
+  "CONFIGURATION MANAGEMENT",
+  "DEPLOYMENT VERIFICATION",
+  "PIPELINE COMPLETED"
+ ];
+
+ let i = 0;
+
+ pipelineTimer = setInterval(() => {
+
+  if(i >= steps.length) {
+   clearInterval(pipelineTimer);
+   pipelineTimer = null;
+   addLog("DEMO FINISHED - NO REAL DEPLOYMENT EXECUTED");
+   return;
+  }
+
+  if(i < nodes.length) {
+   nodes[i].classList.add("active");
+  }
+
+  addLog(steps[i]);
+  i++;
+
+ },850);
 }
 
 function rollback() {
-  addLog("ROLLBACK DEMONSTRATION REQUESTED");
-  addLog("Simulation only - no server configuration changed");
+
+ if(pipelineTimer) {
+  clearInterval(pipelineTimer);
+  pipelineTimer = null;
+ }
+
+ document.querySelectorAll(".node").forEach(n => {
+  n.classList.remove("active");
+ });
+
+ addLog("!!! ROLLBACK PROTOCOL INITIATED");
+ addLog("PREVIOUS CONFIGURATION RESTORATION SIMULATED");
+ addLog("SIMULATION ONLY - NO SERVER CONFIGURATION CHANGED");
 }
 </script>
 
