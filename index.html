@@ -3,57 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYNET | ANSIBLE TERMINATOR COMMAND</title>
+
+<title>DIGITAL FACTORY | SKYNET COMMAND CENTER</title>
 
 <style>
 :root {
-  --bg:#050505;
-  --panel:#111315;
-  --panel2:#191b1d;
-  --line:#49302c;
-  --red:#ff2525;
-  --red2:#a00000;
-  --orange:#ff6a00;
-  --steel:#aeb4b8;
-  --text:#e5e5e5;
-  --muted:#858585;
-  --green:#ff3b22;
+ --bg:#050505;
+ --panel:rgba(12,13,15,.94);
+ --line:#70251f;
+ --red:#ff2525;
+ --red2:#a00000;
+ --orange:#ff6a00;
+ --steel:#b7b7b7;
+ --text:#ededed;
+ --muted:#929292;
+ --green:#ff3838;
 }
 
-*{box-sizing:border-box}
+* {
+ box-sizing:border-box;
+}
+
+html {
+ scroll-behavior:smooth;
+}
 
 body {
  margin:0;
  background:
- radial-gradient(ellipse at 50% 0%,#35100d 0%,transparent 45%),
- linear-gradient(180deg,#080808,#030303);
+ linear-gradient(rgba(0,0,0,.77),rgba(0,0,0,.91)),
+ url("assets/digital-factory-bg.png") center center / cover fixed;
  color:var(--text);
  font-family:Arial,sans-serif;
 }
+
+/* SCANLINES */
 
 body:before {
  content:"";
  position:fixed;
  inset:0;
  pointer-events:none;
- z-index:10;
+ z-index:20;
  background:repeating-linear-gradient(
  transparent 0px,
- rgba(255,30,20,.025) 1px,
+ rgba(255,30,20,.035) 1px,
  transparent 3px
  );
 }
 
+/* HEADER */
+
 header {
- padding:20px 30px;
- background:linear-gradient(90deg,#080808,#1b0b09,#080808);
+ padding:18px 30px;
+ background:rgba(0,0,0,.92);
  border-bottom:2px solid var(--red);
  display:flex;
  justify-content:space-between;
  align-items:center;
  flex-wrap:wrap;
  gap:15px;
- box-shadow:0 5px 25px #ff000022;
+ box-shadow:0 5px 30px #ff000033;
 }
 
 .logo {
@@ -71,21 +81,25 @@ header {
  animation:blink 1.5s infinite;
 }
 
+/* MAIN */
+
 .container {
  padding:25px;
  max-width:1500px;
  margin:auto;
 }
 
+/* HERO */
+
 .hero {
  position:relative;
  overflow:hidden;
  padding:35px;
- border:1px solid #79302a;
+ border:1px solid #87342b;
  background:
- linear-gradient(110deg,#190b09,#111315 55%,#260c08);
+ linear-gradient(110deg,rgba(15,5,4,.95),rgba(10,10,10,.78));
  margin-bottom:25px;
- box-shadow:inset 0 0 35px #ff180c18;
+ box-shadow:inset 0 0 40px #ff180c18;
 }
 
 .hero:after {
@@ -93,14 +107,14 @@ header {
  position:absolute;
  right:35px;
  top:35px;
- font-size:65px;
+ font-size:70px;
  font-weight:900;
  color:#ff252510;
  letter-spacing:8px;
 }
 
 .hero h1 {
- font-size:30px;
+ font-size:32px;
  color:var(--red);
  margin:0 0 12px;
  letter-spacing:3px;
@@ -108,9 +122,9 @@ header {
 }
 
 .hero p {
- color:#aaa;
+ color:#bbb;
  font-size:13px;
- letter-spacing:1px;
+ letter-spacing:2px;
 }
 
 /* ROBOT EYE */
@@ -119,50 +133,74 @@ header {
  display:flex;
  justify-content:center;
  align-items:center;
- margin:35px auto;
+ margin:35px auto 20px;
 }
 
 .robot-eye {
- width:125px;
- height:125px;
- border:2px solid #6c2520;
+ width:135px;
+ height:135px;
+ border:2px solid #8b3028;
  border-radius:50%;
  display:flex;
  justify-content:center;
  align-items:center;
- background:radial-gradient(circle,#29100d,#080808 70%);
- box-shadow:0 0 25px #ff000044,inset 0 0 25px #ff000022;
+ background:radial-gradient(circle,#35100d,#080808 70%);
+ box-shadow:0 0 25px #ff000066,
+ inset 0 0 25px #ff000033;
  position:relative;
 }
 
-.robot-eye:before,
-.robot-eye:after {
+.robot-eye:before {
  content:"";
  position:absolute;
- border:1px solid #ff252555;
+ width:110px;
+ height:110px;
+ border:1px solid #ff252566;
  border-radius:50%;
 }
 
-.robot-eye:before {
- width:105px;
- height:105px;
-}
-
 .robot-eye:after {
- width:85px;
- height:85px;
- border-style:dashed;
+ content:"";
+ position:absolute;
+ width:90px;
+ height:90px;
+ border:1px dashed #ff2525;
+ border-radius:50%;
  animation:spin 12s linear infinite;
 }
 
 .lens {
- width:35px;
- height:35px;
- background:radial-gradient(circle,#fff 0%,#ff8585 12%,#ff0000 35%,#780000 75%);
+ width:38px;
+ height:38px;
+ background:radial-gradient(
+ circle,
+ #fff 0%,
+ #ff8585 12%,
+ #ff0000 35%,
+ #780000 75%
+ );
  border-radius:50%;
- box-shadow:0 0 15px red,0 0 35px red;
+ box-shadow:0 0 15px red,0 0 40px red;
  animation:eyePulse 1.5s infinite alternate;
 }
+
+.scanner {
+ width:100%;
+ height:2px;
+ position:absolute;
+ background:#ff2525;
+ box-shadow:0 0 15px red;
+ animation:scan 3s linear infinite;
+}
+
+.core-label {
+ text-align:center;
+ color:#ff4545;
+ font-size:11px;
+ letter-spacing:3px;
+}
+
+/* METRICS */
 
 .grid {
  display:grid;
@@ -172,8 +210,8 @@ header {
 }
 
 .card,.env,.module {
- background:linear-gradient(145deg,#191b1d,#0a0b0c);
- border:1px solid #49302c;
+ background:var(--panel);
+ border:1px solid var(--line);
  border-radius:4px;
  padding:20px;
  box-shadow:inset 0 0 15px #ff000008;
@@ -182,13 +220,13 @@ header {
 
 .card:hover,.module:hover,.env:hover {
  border-color:var(--red);
- box-shadow:0 0 20px #ff000022;
+ box-shadow:0 0 20px #ff000033;
  transform:translateY(-3px);
 }
 
 .card h3 {
  font-size:11px;
- color:#999;
+ color:#aaa;
  letter-spacing:2px;
 }
 
@@ -200,9 +238,26 @@ header {
  text-shadow:0 0 12px #ff000055;
 }
 
-.cyan,.green,.purple,.orange {
- color:var(--red)!important;
+.card small {
+ color:#999;
 }
+
+.bar {
+ height:8px;
+ background:#302020;
+ overflow:hidden;
+ margin:12px 0;
+}
+
+.bar span {
+ display:block;
+ height:100%;
+ width:96%;
+ background:linear-gradient(90deg,#700000,#ff2929);
+ box-shadow:0 0 15px red;
+}
+
+/* SECTION TITLES */
 
 .section-title {
  color:var(--red);
@@ -212,6 +267,8 @@ header {
  border-left:3px solid red;
  padding-left:12px;
 }
+
+/* ENVIRONMENTS */
 
 .environment {
  display:grid;
@@ -241,8 +298,21 @@ header {
  font-size:25px;
  font-weight:bold;
  color:white;
- box-shadow:0 0 20px #ff000033,inset 0 0 20px #ff000022;
+ box-shadow:0 0 20px #ff000033,
+ inset 0 0 20px #ff000022;
 }
+
+.env p {
+ color:#aaa;
+ font-size:13px;
+}
+
+.env span {
+ color:#ff4444;
+ font-size:11px;
+}
+
+/* PIPELINE */
 
 .pipeline {
  display:flex;
@@ -254,7 +324,7 @@ header {
 
 .node {
  flex:1;
- min-width:115px;
+ min-width:110px;
  padding:20px 10px;
  text-align:center;
  border:1px solid #96352e;
@@ -267,7 +337,7 @@ header {
 }
 
 .node.active {
- background:#700900;
+ background:#850900;
  color:white;
  box-shadow:0 0 25px red;
  border-color:white;
@@ -277,6 +347,8 @@ header {
  color:var(--red);
  font-size:24px;
 }
+
+/* MODULES */
 
 .modules {
  display:grid;
@@ -296,20 +368,7 @@ header {
  line-height:1.8;
 }
 
-.bar {
- height:8px;
- background:#302020;
- overflow:hidden;
- margin:12px 0;
-}
-
-.bar span {
- display:block;
- height:100%;
- width:96%;
- background:linear-gradient(90deg,#700000,#ff2929);
- box-shadow:0 0 15px red;
-}
+/* BUTTONS */
 
 button {
  padding:13px 22px;
@@ -329,16 +388,18 @@ button:hover {
  box-shadow:0 0 20px red;
 }
 
+/* TERMINAL */
+
 .logs {
- background:#030303;
+ background:rgba(0,0,0,.96);
  border:1px solid #6b211b;
  padding:18px;
  color:#ff4545;
  font-family:monospace;
  font-size:12px;
  line-height:2;
- min-height:130px;
- max-height:220px;
+ min-height:140px;
+ max-height:230px;
  overflow:auto;
  box-shadow:inset 0 0 25px #ff000011;
 }
@@ -346,36 +407,54 @@ button:hover {
 footer {
  text-align:center;
  padding:30px;
- color:#777;
+ color:#888;
  border-top:1px solid #48201c;
  margin-top:40px;
  font-size:11px;
  letter-spacing:2px;
+ line-height:2;
 }
 
+/* ANIMATIONS */
+
 @keyframes blink {
- 50%{opacity:.35}
+ 50% {opacity:.35}
 }
 
 @keyframes spin {
- to{transform:rotate(360deg)}
+ to {transform:rotate(360deg)}
 }
 
 @keyframes eyePulse {
- from{box-shadow:0 0 10px red}
- to{box-shadow:0 0 35px red,0 0 55px #ff000088}
+ from {box-shadow:0 0 10px red}
+ to {box-shadow:0 0 35px red,0 0 55px #ff000088}
 }
 
+@keyframes scan {
+ 0% {top:0;opacity:0}
+ 15% {opacity:1}
+ 85% {opacity:1}
+ 100% {top:100%;opacity:0}
+}
+
+/* RESPONSIVE */
+
 @media(max-width:900px) {
- .grid{grid-template-columns:repeat(2,1fr)}
- .modules{grid-template-columns:repeat(2,1fr)}
+ .grid {grid-template-columns:repeat(2,1fr)}
+ .modules {grid-template-columns:repeat(2,1fr)}
 }
 
 @media(max-width:600px) {
- .container{padding:12px}
- .grid,.environment,.modules{grid-template-columns:1fr}
- .hero h1{font-size:22px}
- .hero:after{display:none}
+ header {padding:16px}
+ .logo {font-size:15px}
+ .container {padding:12px}
+ .grid,.environment,.modules {grid-template-columns:1fr}
+ .hero {padding:22px}
+ .hero h1 {font-size:22px}
+ .hero:after {display:none}
+ .pipeline {flex-direction:column}
+ .node {width:100%}
+ .arrow {transform:rotate(90deg)}
 }
 </style>
 </head>
@@ -383,27 +462,37 @@ footer {
 <body>
 
 <header>
- <div class="logo">☠ SKYNET // TERMINATOR</div>
+ <div class="logo">☠ DIGITAL FACTORY // SKYNET</div>
  <div class="status">● SYSTEM ONLINE / OPERATOR CONNECTED</div>
 </header>
 
 <main class="container">
 
+<!-- DIGITAL FACTORY HERO -->
+
 <section class="hero">
- <h1>ANSIBLE GOVERNANCE COMMAND</h1>
- <p>TERMINATOR T-800 // INFRASTRUCTURE CONTROL SYSTEM</p>
+
+ <h1>DIGITAL FACTORY</h1>
+
+ <p>TERMINATOR T-800 // ANSIBLE GOVERNANCE COMMAND CENTER</p>
+
  <p>ON-PREMISE · AUTOMATION · DEVSECOPS · GITHUB ACTIONS</p>
 
  <div class="eye-container">
   <div class="robot-eye">
    <div class="lens"></div>
+   <div class="scanner"></div>
   </div>
  </div>
 
- <center style="color:#ff3939;font-size:11px;letter-spacing:3px">
-  SKYNET ARTIFICIAL INTELLIGENCE // MONITORING ACTIVE
- </center>
+ <div class="core-label">
+  SKYNET ARTIFICIAL INTELLIGENCE<br>
+  INFRASTRUCTURE MONITORING ACTIVE
+ </div>
+
 </section>
+
+<!-- METRICS -->
 
 <div class="grid">
 
@@ -434,6 +523,8 @@ footer {
 
 </div>
 
+<!-- ENVIRONMENTS -->
+
 <h2 class="section-title">01 / ENVIRONMENT CONTROL</h2>
 
 <div class="environment">
@@ -442,42 +533,51 @@ footer {
   <h2>DEV</h2>
   <div class="circle">01</div>
   <p>Development Environment</p>
-  <span class="green">● CONFIGURED</span>
+  <span>● CONFIGURED</span>
  </div>
 
  <div class="env">
   <h2>QA</h2>
   <div class="circle">02</div>
   <p>Quality Assurance</p>
-  <span class="green">● CONFIGURED</span>
+  <span>● CONFIGURED</span>
  </div>
 
  <div class="env">
   <h2>PROD</h2>
   <div class="circle">03</div>
   <p>Production Environment</p>
-  <span class="green">● CONFIGURED</span>
+  <span>● CONFIGURED</span>
  </div>
 
 </div>
+
+<!-- PIPELINE -->
 
 <h2 class="section-title">02 / SKYNET CI/CD PIPELINE</h2>
 
 <div class="card">
 
  <div class="pipeline">
+
   <div class="node">GIT PUSH</div>
   <div class="arrow">›</div>
+
   <div class="node">VALIDATION</div>
   <div class="arrow">›</div>
+
   <div class="node">ANSIBLE</div>
   <div class="arrow">›</div>
+
   <div class="node">DEPLOY</div>
   <div class="arrow">›</div>
+
   <div class="node">VERIFY</div>
+
  </div>
 
  <br>
+
  <center>
   <button onclick="runPipeline()">▶ INITIATE SKYNET</button>
   <button onclick="rollback()">↶ ROLLBACK</button>
@@ -485,46 +585,80 @@ footer {
 
 </div>
 
+<!-- GOVERNANCE -->
+
 <h2 class="section-title">03 / GOVERNANCE & SECURITY</h2>
 
 <div class="modules">
 
  <div class="module">
   <h3>◈ CONFIGURATION MANAGEMENT</h3>
-  <p>Ansible Playbooks<br>Roles & Variables<br>Jinja2 Templates<br>Inventory Management</p>
+  <p>
+   Ansible Playbooks<br>
+   Roles & Variables<br>
+   Jinja2 Templates<br>
+   Inventory Management
+  </p>
  </div>
 
  <div class="module">
   <h3>◈ SECURITY GOVERNANCE</h3>
-  <p>Access Control<br>SSH Security<br>Least Privilege<br>Secrets Management</p>
+  <p>
+   Access Control<br>
+   SSH Security<br>
+   Least Privilege<br>
+   Secrets Management
+  </p>
  </div>
 
  <div class="module">
   <h3>◈ COMPLIANCE CONTROL</h3>
-  <p>Configuration Standards<br>Change Management<br>Infrastructure Baselines<br>Audit & Traceability</p>
+  <p>
+   Configuration Standards<br>
+   Change Management<br>
+   Infrastructure Baselines<br>
+   Audit & Traceability
+  </p>
  </div>
 
  <div class="module">
   <h3>◈ INFRASTRUCTURE</h3>
-  <p>Linux Servers<br>Nginx Web Services<br>Network Configuration<br>On-Premise Architecture</p>
+  <p>
+   Linux Servers<br>
+   Nginx Web Services<br>
+   Network Configuration<br>
+   On-Premise Architecture
+  </p>
  </div>
 
  <div class="module">
   <h3>◈ DELIVERY CONTROL</h3>
-  <p>Git Version Control<br>GitHub Actions<br>Deployment Validation<br>Release Management</p>
+  <p>
+   Git Version Control<br>
+   GitHub Actions<br>
+   Deployment Validation<br>
+   Release Management
+  </p>
  </div>
 
  <div class="module">
   <h3>◈ OBSERVABILITY</h3>
-  <p>Service Health<br>Execution Logs<br>HTTP Validation<br>Operational Monitoring</p>
+  <p>
+   Service Health<br>
+   Execution Logs<br>
+   HTTP Validation<br>
+   Operational Monitoring
+  </p>
  </div>
 
 </div>
 
+<!-- TERMINAL -->
+
 <h2 class="section-title">04 / SKYNET EXECUTION TERMINAL</h2>
 
 <div class="logs" id="logs">
-[SYSTEM] SKYNET INITIALIZED<br>
+[SYSTEM] DIGITAL FACTORY INITIALIZED<br>
 [CORE] T-800 CONTROL SYSTEM ONLINE<br>
 [INFO] ON-PREMISE ARCHITECTURE LOADED<br>
 [INFO] DEV / QA / PROD CONFIGURED<br>
@@ -535,27 +669,42 @@ footer {
 </main>
 
 <footer>
- SKYNET // ANSIBLE TERMINATOR COMMAND CENTER<br>
- T-800 INFRASTRUCTURE GOVERNANCE · DEVSECOPS · PLATFORM ENGINEERING
+ DIGITAL FACTORY // SKYNET TERMINATOR COMMAND CENTER<br>
+ T-800 INFRASTRUCTURE GOVERNANCE · DEVSECOPS · PLATFORM ENGINEERING<br>
+ SYSTEM STATUS: VISUAL DEMONSTRATION
 </footer>
 
 <script>
+
 const logs = document.getElementById("logs");
+const nodes = document.querySelectorAll(".node");
+
 let pipelineTimer = null;
 
 function addLog(message) {
- logs.innerHTML += "<br>[SKYNET] " + message;
+
+ const line = document.createElement("div");
+
+ line.textContent = "[SKYNET] " + message;
+
+ logs.appendChild(line);
+
  logs.scrollTop = logs.scrollHeight;
+
 }
 
 function runPipeline() {
 
- if(pipelineTimer) clearInterval(pipelineTimer);
+ if(pipelineTimer) {
+  clearInterval(pipelineTimer);
+ }
 
- logs.innerHTML = "[SKYNET] INITIATING PIPELINE...";
+ nodes.forEach(node => node.classList.remove("active"));
 
- const nodes = document.querySelectorAll(".node");
- nodes.forEach(n => n.classList.remove("active"));
+ logs.innerHTML = "";
+
+ addLog("INITIATING PIPELINE...");
+ addLog("OPERATOR COMMAND ACCEPTED");
 
  const steps = [
   "GIT PUSH DETECTED",
@@ -571,9 +720,13 @@ function runPipeline() {
  pipelineTimer = setInterval(() => {
 
   if(i >= steps.length) {
+
    clearInterval(pipelineTimer);
    pipelineTimer = null;
-   addLog("DEMO FINISHED - NO REAL DEPLOYMENT EXECUTED");
+
+   addLog("DEMO FINISHED");
+   addLog("NO REAL DEPLOYMENT EXECUTED");
+
    return;
   }
 
@@ -582,9 +735,11 @@ function runPipeline() {
   }
 
   addLog(steps[i]);
+
   i++;
 
  },850);
+
 }
 
 function rollback() {
@@ -594,14 +749,14 @@ function rollback() {
   pipelineTimer = null;
  }
 
- document.querySelectorAll(".node").forEach(n => {
-  n.classList.remove("active");
- });
+ nodes.forEach(node => node.classList.remove("active"));
 
  addLog("!!! ROLLBACK PROTOCOL INITIATED");
  addLog("PREVIOUS CONFIGURATION RESTORATION SIMULATED");
  addLog("SIMULATION ONLY - NO SERVER CONFIGURATION CHANGED");
+
 }
+
 </script>
 
 </body>
