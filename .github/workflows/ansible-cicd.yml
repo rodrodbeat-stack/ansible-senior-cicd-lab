@@ -1,0 +1,37 @@
+name: ANSIBLE SENIOR CI-CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate Ansible
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Ansible
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ansible
+
+      - name: Validate DEV
+        run: |
+          ansible-playbook -i inventory/dev/hosts.yml site.yml \
+          -e environment=dev --syntax-check
+
+      - name: Validate QA
+        run: |
+          ansible-playbook -i inventory/qa/hosts.yml site.yml \
+          -e environment=qa --syntax-check
+
+      - name: Validate PROD
+        run: |
+          ansible-playbook -i inventory/prod/hosts.yml site.yml \
+          -e environment=prod --syntax-check
